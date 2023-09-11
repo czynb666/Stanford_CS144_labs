@@ -3,9 +3,19 @@
 #include "byte_stream.hh"
 
 #include <string>
+#include <set>
 
 class Reassembler
 {
+
+private:
+
+  // <index, content>
+  bool caughtLastDatagram;
+  uint64_t firstUnassembledIndex;
+  uint64_t totalStringLength;
+  std::set<std::pair<uint64_t, std::string> > buffer;
+
 public:
   /*
    * Insert a new substring to be reassembled into a ByteStream.
@@ -27,6 +37,9 @@ public:
    *
    * The Reassembler should close the stream after writing the last byte.
    */
+
+  Reassembler();
+
   void insert( uint64_t first_index, std::string data, bool is_last_substring, Writer& output );
 
   // How many bytes are stored in the Reassembler itself?
