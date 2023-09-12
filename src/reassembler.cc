@@ -13,7 +13,7 @@ void Reassembler::insert( uint64_t first_index, string data, bool is_last_substr
   // this splits this function into two individual parts.j
 
   caughtLastDatagram |= is_last_substring;
-
+  
   if (first_index < firstUnassembledIndex) {
     if (first_index + data.size() < firstUnassembledIndex)
       return;
@@ -21,7 +21,7 @@ void Reassembler::insert( uint64_t first_index, string data, bool is_last_substr
     first_index += offset;
     data.erase(0, offset);
   }
-
+  
   if (first_index + data.size() > firstUnassembledIndex + output.available_capacity()) {
     if (first_index > firstUnassembledIndex + output.available_capacity())
       return;
@@ -76,4 +76,8 @@ uint64_t Reassembler::bytes_pending() const
 {
   // Your code here.
   return totalStringLength;
+}
+
+uint64_t Reassembler::getFirstUnassembledIndex() const {
+  return firstUnassembledIndex;
 }

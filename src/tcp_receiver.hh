@@ -6,6 +6,14 @@
 
 class TCPReceiver
 {
+
+private:
+
+  std::optional<Wrap32> ISN {};
+  std::optional<Wrap32> ACKNO {};
+  std::optional<Wrap32> FINpos {};
+  std::optional<uint64_t> absoluteACKNO {};
+
 public:
   /*
    * The TCPReceiver receives TCPSenderMessages, inserting their payload into the Reassembler
